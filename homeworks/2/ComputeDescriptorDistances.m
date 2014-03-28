@@ -1,7 +1,7 @@
 function ComputeDescriptorDistances(in_dir, nbins, nsegments, out_prefix)
 %COMPUTEDESCRIPTORDISTANCES Summary of this function goes here
 %   Detailed explanation goes here
-dnames = {'Template','Histogram','GridHistogram','SIFT'}
+dnames = {'Template','Histogram','GridHistogram','SIFT'};
 
 Fs = ComputeDescriptors(in_dir,nbins,nsegments);
 for i = 1:4

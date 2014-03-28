@@ -90,3 +90,16 @@ end
 close all;
 ComputeDescriptorDistances('pics/Aligned_Pics', 30, 2, 'results/dmat_align');
 ComputeDescriptorDistances('pics/Misaligned_Pics', 30, 2, 'results/dmat_misalign');
+
+%% feature vector visualisation
+close all;
+Fs = ComputeDescriptors('pics/Aligned_Pics',30,2);
+Dms = ComputeDistanceMatrices(Fs);
+ni = size(Dms{1},2);
+
+Y = mdscale(Dms{4}, 2);
+figure
+plot(Y(1:ni/2, 1), Y(1:ni/2, 2), 'rx', 'MarkerSize', 10);
+hold on
+plot(Y(ni/2+1:end, 1), Y(ni/2+1:end, 2), 'bo', 'MarkerSize',10);
+axis equal
