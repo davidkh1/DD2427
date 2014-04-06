@@ -10,10 +10,10 @@ function cim = GrabCentrePixels(im_fname, p)
     grabheight = floor(p * height);
     grabwidth = floor(p * width);
     
-    topleftx = floor(centrex - grabwidth/2);
-    toplefty = floor(centrey - grabheight/2);
-    botrightx = topleftx + grabwidth;
-    botrighty = toplefty + grabheight;
+    topleftx = ceil(centrex - grabwidth/2) + 1;
+    toplefty = ceil(centrey - grabheight/2) + 1;
+    botrightx = topleftx + grabwidth - 1;
+    botrighty = toplefty + grabheight - 1;
 
 %     figure
 %     imshow(im)
