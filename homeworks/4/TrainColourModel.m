@@ -5,7 +5,7 @@ function [ mu, sigma ] = TrainColourModel(im_dir, n_ims, centre_prop, cmodel)
 % nothing is given, then RGB is assumed - options are rgb or hsv
 
     if nargin < 4
-        cmodel = 'rgb'
+        cmodel = 'rgb';
     end
 
     allims = ListDirImages(im_dir);
