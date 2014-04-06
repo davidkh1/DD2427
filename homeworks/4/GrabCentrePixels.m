@@ -1,7 +1,7 @@
 function cim = GrabCentrePixels(im_fname, p)
 %GRABCENTREPIXELS Summary of this function goes here
 %   Detailed explanation goes here
-    im = loadimage(im_fname);
+    im = imread(im_fname);
     height = size(im, 1);
     width = size(im, 2);
     centrey = floor(height/2);

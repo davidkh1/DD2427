@@ -1,6 +1,6 @@
 % putting things on the grayscale image
 close all;
-img = loadimage('pics/bike_small_gray.jpg');
+img = showimage('pics/bike_small_gray.jpg');
 colormap('gray')
 hold on;
 
@@ -32,7 +32,7 @@ size(orig)
 
 %% colour image
 close all
-img = loadimage('pics/Flowers.jpg');
+img = showimage('pics/Flowers.jpg');
 ndims(img)
 size(img)
 
@@ -45,20 +45,20 @@ montage({R,G,B}, 'size',[1,3])
 
 %% testing the image modifier for the deutan
 close all
-img = loadimage('pics/FireEngine.jpg');
+img = showimage('pics/FireEngine.jpg');
 dimg = deutan(img);
 figure
 imagesc(dimg/255)
 
 %% testing the image modifier for the protan
 close all
-img = loadimage('pics/FireEngine.jpg');
+img = showimage('pics/FireEngine.jpg');
 pimg = protan(img);
 figure
 imagesc(pimg/255)
 
 %% testing full function (trivial)
 close all
-img = loadimage('pics/Flowers.jpg');
+img = showimage('pics/Flowers.jpg');
 [pim, dim] = MakeDichromatIms(img);
 montage({img, pim/255, dim/255}, 'size', [1 3])
