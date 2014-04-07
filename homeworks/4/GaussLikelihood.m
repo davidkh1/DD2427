@@ -10,7 +10,7 @@ function lvals =  GaussLikelihood(xs, mean, covar)
     cinv = inv(covar);  
     lvals = zeros(n,1);
     
-    normaliser = 1/((2*pi)*(d/2)*sqrt(det(covar)));
+    normaliser = 1/((2*pi)^(d/2)*sqrt(det(covar)));
     % could simplify this significantly
     for i=1:n
         lvals(i,:) = normaliser * exp(-0.5*dist(i,:)*cinv*dist(i,:)');

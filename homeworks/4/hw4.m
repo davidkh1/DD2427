@@ -61,6 +61,8 @@ testim = RGBvectorise(imread('../1/pics/bike_small.jpg'));
 [bgmu, bgsigma] = TrainColourModel('BackgroundImages',0,1);
 bglvals = GaussLikelihood(testim,bgmu,bgsigma);
 im_bglvals = reshape(bglvals, size(imorig,1), size(imorig,2));
+figure
+imshow(im_bglvals/max(bglvals))
 
 % train colour model on pictures of bush
 [mu, sigma] = TrainColourModel('BushImages',20,0.2);
@@ -68,6 +70,8 @@ im_bglvals = reshape(bglvals, size(imorig,1), size(imorig,2));
 lvals = GaussLikelihood(testim, mu, sigma);
 % normalise the probabilities to display as an image
 im_lvals = reshape(lvals, size(imorig,1), size(imorig,2));
+figure
+imshow(im_lvals/max(lvals))
 
 lrat = im_lvals./im_bglvals;
 figure

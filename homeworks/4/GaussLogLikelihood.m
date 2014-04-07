@@ -15,7 +15,7 @@ function loglvals = GaussLogLikelihood(xs, mean, covar)
     normaliser = -(d/2)*log(2*pi)-(1/2)*log(det(covar));
     % could simplify this significantly
     for i=1:n
-        loglvals(i,:) = normaliser + -0.5*dist(i,:)*cinv*dist(i,:)';
+        loglvals(i,:) = normaliser -0.5*dist(i,:)*cinv*dist(i,:)';
     end
 end
 
