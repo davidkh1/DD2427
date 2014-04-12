@@ -42,3 +42,24 @@ mymontage(facecell, 'size', [2 10])
 
 % looking at the eigenvalues
 tind = EigenPlot(eval, 0.9);
+
+
+
+%% run the above first
+close all;
+
+% student face extraction
+im = double(imread('homeworks/4/StudentImages/Student4.jpg'));
+im = im(183:248, 297:362);
+
+figure
+imagesc(im);
+colormap(gray)
+axis equal
+
+nvecs = 250;
+rec = ReconstructFace(im, mu, evec, w(1), h(1), nvecs);
+figure
+imagesc(rec)
+colormap(gray)
+axis equal
