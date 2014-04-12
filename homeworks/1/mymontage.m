@@ -1,4 +1,4 @@
-function montage(I, varargin)
+function mymontage(I, varargin)
 %MONTAGE  Display multiple images as a montage of subplots
 %
 % Examples:

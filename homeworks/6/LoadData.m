@@ -5,6 +5,9 @@ function [X, w, h] = LoadData(dir, pw, ph, n)
 %image width and height.
 
     dirIm = ListDirImages(dir);
+    if (n == 0)
+        n = size(dirIm,1);
+    end
     X = [];
     w = [];
     h = [];
@@ -30,15 +33,18 @@ function [X, w, h] = LoadData(dir, pw, ph, n)
 %         plot(botrightx, botrighty, 'ro','linewidth',2,'markersize',12)
 
         cim = im(toplefty:botrighty, topleftx:botrightx, :);
-        gry = rgb2gray(cim);
-        gry = double(gry(:)');
+        gry = cim;
+        if (ndims(gry) > 2)
+            gry = rgb2gray(cim);
+        end
+        gry = double(gry(:));
         gry = (gry - mean(gry))/std(gry);
         
 %         figure
 %         disp = reshape(gry, size(cim,1), size(cim,2));
 %         imshow(disp)
          
-        X = [X; gry];
+        X = [X gry];
         h = [h size(cim,1)];
         w = [w size(cim,2)];
     end

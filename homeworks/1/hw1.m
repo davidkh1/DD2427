@@ -41,7 +41,7 @@ G = double(img(:,:,2));
 B = double(img(:,:,3));
 
 figure
-montage({R,G,B}, 'size',[1,3])
+mymontage({R,G,B}, 'size',[1,3])
 
 %% testing the image modifier for the deutan
 close all
@@ -61,4 +61,4 @@ imagesc(pimg/255)
 close all
 img = showimage('pics/Flowers.jpg');
 [pim, dim] = MakeDichromatIms(img);
-montage({img, pim/255, dim/255}, 'size', [1 3])
+mymontage({img, pim/255, dim/255}, 'size', [1 3])
