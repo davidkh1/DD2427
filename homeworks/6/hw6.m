@@ -8,14 +8,14 @@ close all;
 [mu, evec, eval] = ComputePCABasis(X);
 
 % display some of the eigenfaces
-nfaces = 20;
+nfaces = 10;
 facecell = cell(1,nfaces);
-facecell{1} = reshape(mu/max(mu),h(1),w(1));
-for i=2:nfaces
+%facecell{1} = reshape(mu/max(mu),h(1),w(1));
+for i=1:nfaces
     facecell{i} = reshape(evec(:,i)/max(evec(:,i)), h(1), w(1));
 end
 
-mymontage(facecell, 'size', [2 10])
+mymontage(facecell, 'size', [2 5])
 
 % looking at the eigenvalues
 tind = EigenPlot(eval, 0.9);
@@ -31,14 +31,14 @@ imagesc(reshape(mu, w(1), h(1)));
 axis equal
 colormap('gray')
 % display some of the eigenfaces
-nfaces = 20;
+nfaces = 10;
 facecell = cell(1,nfaces);
-facecell{1} = reshape(mu/max(mu),h(1),w(1));
-for i=2:nfaces
+%facecell{1} = reshape(mu/max(mu),h(1),w(1));
+for i=1:nfaces
     facecell{i} = reshape(evec(:,i)/max(evec(:,i)), h(1), w(1));
 end
 figure
-mymontage(facecell, 'size', [2 10])
+mymontage(facecell, 'size', [2 5])
 
 % looking at the eigenvalues
 tind = EigenPlot(eval, 0.9);
@@ -57,9 +57,14 @@ imagesc(im);
 colormap(gray)
 axis equal
 
-nvecs = 250;
-rec = ReconstructFace(im, mu, evec, w(1), h(1), nvecs);
-figure
-imagesc(rec)
-colormap(gray)
-axis equal
+nvecs = [1 10 20 50 100 200 250];
+recs = cell(1,size(nvecs,2)+1);
+recs{1} = im./max(im(:));
+for i = 2:size(recs,2)
+    rf = ReconstructFace(im, mu, evec, w(1), h(1), nvecs(i-1));
+    recs{i} = rf./max(rf(:));
+end
+
+for i = 1:size(recs,2)
+    ShowIm(recs{i})
+end

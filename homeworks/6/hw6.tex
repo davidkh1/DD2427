@@ -1,0 +1,97 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage{fontspec}
+\usepackage{subfigure}
+\usepackage[top=1cm]{geometry}
+\usepackage{amsmath}
+\defaultfontfeatures{Mapping=tex-text}
+\setromanfont[Ligatures={Common},Numbers={Lining}]{Linux Libertine}
+\author{Michal Staniaszek}
+\title{DD2427 Homework 6}
+
+\begin{document}
+\maketitle
+
+\section{Eigenface Computation}
+We compute eigenfaces differently depending on the size of the matrix $X_c$ which
+contains our training data, which is a $d\times n$ matrix. The computation of
+the covariance $C$ is 
+\begin{equation}
+  \label{eq:1}
+  C=\frac{1}{n}X_cX_c^T
+\end{equation}
+This is then a $d\times d$ matrix --- computing the eigenvalues is extremely
+expensive. Instead, we compute
+\begin{equation}
+  \label{eq:2}
+  C_1=\frac{1}{n}X_c^TX_c
+\end{equation}
+and use 
+\begin{equation}
+  \label{eq:3}
+  v_1=X_cv
+\end{equation}
+to compute an eigenvector $v_1$ of $C$ using the eigenvector $v$ of $C_1$. Both
+of these have eigenvalues of $\lambda$. This multiplication results in $d\times
+1$ vector, which we would expect for an eigenvector of $C$. It can be shown that
+these eigenvectors are identical by the following method. First, we know that an
+eigenvector of $C$ looks like
+\begin{equation}
+  X_cX_c^Tv_1=\lambda v_1\\
+\end{equation}
+The eigenvectors of $C_1$ look like
+\begin{equation}
+  \label{eq:4}
+  X_c^TX_cv=\lambda v\\
+\end{equation}
+If we then pre-multiply both sides of \eqref{eq:4} by $X_c$ we get
+\begin{equation}
+  \label{eq:5}
+  X_cX_c^TX_cv=\lambda X_cv\\
+\end{equation}
+Then, grouping the terms,
+\begin{align}
+  \label{eq:5}
+  X_cX_c^T\left(X_cv\right)=\lambda \left(X_cv\right)\\
+  C\left(X_cv\right)=\lambda \left(X_cv\right)
+\end{align}
+Thus, $X_cv$ must be an eigenvector of $C$ which has the same eigenvalue as the
+eigenvector of $C_1$.
+  
+
+\section{Eigenfaces and Reconstruction}
+\begin{figure}
+  \centering
+  \subfigure[Bush Dataset]{\includegraphics[width=\linewidth]{results/busheig}}
+  \subfigure[ADAFACES Dataset]{\includegraphics[width=\linewidth]{results/adaeig}}
+  \caption{First 10 eigenfaces for the Bush and ADAFACES data sets, computed
+    using 530 and 3000 images respectively.}
+  \label{fig:eigf}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \subfigure[Bush dataset]{\includegraphics[width=0.48\linewidth]{results/bushcumsum}}
+  \subfigure[ADAFACES dataset]{\includegraphics[width=0.48\linewidth]{results/adacumsum}}
+    \caption{Cumulative sum of the eigenvalues for the Bush and ADAFACES sets
+      using 530 and 3000 images respectively. The red line indicates the number
+      of eigenvectors required to retain 90\% of the variation in the data.}
+  \label{fig:csum}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \subfigure[Original]{\includegraphics[width=0.2\linewidth]{results/student/orig}}
+  \subfigure[1]{\includegraphics[width=0.2\linewidth]{results/student/rec1}}
+  \subfigure[10]{\includegraphics[width=0.2\linewidth]{results/student/rec10}}
+  \subfigure[20]{\includegraphics[width=0.2\linewidth]{results/student/rec20}}\\
+  \subfigure[50]{\includegraphics[width=0.2\linewidth]{results/student/rec50}}
+  \subfigure[100]{\includegraphics[width=0.2\linewidth]{results/student/rec100}}
+  \subfigure[200]{\includegraphics[width=0.2\linewidth]{results/student/rec200}}
+  \subfigure[250]{\includegraphics[width=0.2\linewidth]{results/student/rec250}}
+  \caption{Reconstruction of a face using different numbers of eigenfaces
+    computed from the 3000 examples in the ADAFACES set.}
+  \label{fig:rec}
+\end{figure}
+
+\end{document}

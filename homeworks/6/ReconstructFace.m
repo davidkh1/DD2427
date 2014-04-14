@@ -14,12 +14,12 @@ function rim = ReconstructFace(im, mu, W, w, h, N)
     % project the normalised image minus the mean of the faces
     % onto each of the N eigenvectors
     rim = zeros(size(res));
-    coeff = zeros(1, N);
     for i=1:N
-        coeff(i) = dot(W(:,i), res);
-        rim = rim + coeff(i) * W(:,i);
+        rim = rim + dot(W(:,i), res) * W(:,i);
     end
     
+    % reverse the normalisation and resize the image to the size of the
+    % original
     rim = rim + mu;
     rim = (rim + rmean) * rstd;
     rim = reshape(rim, h, w);
